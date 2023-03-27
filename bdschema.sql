@@ -10,7 +10,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Emplacement (
     ville                   VARCHAR(100)            NOT NULL,
     codePostal              VARCHAR(9)              NOT NULL,
     province                VARCHAR(2)              NOT NULL,
-    carte                   INTEGER                   NOT NULL,
+    carte                   INTEGER                 NOT NULL,
     nombreVoitures          INTEGER                 DEFAULT 0,
 
     PRIMARY KEY (eid)
@@ -22,8 +22,8 @@ CREATE TABLE IF NOT EXISTS bdschema.Vehicule (
     modele                  VARCHAR(20)             NOT NULL,
     specifications          TEXT                    NOT NULL,    -- siege auto... etc
     emplacement             VARCHAR(10),                         
-    killometragePrecedent   INTEGER,                             -- killometraqge au compteur
-    killometrageActuel		INTEGER,
+    killometragePrecedent   INTEGER					DEFAULT NULL, --killometraqge au compteur
+    killometrageActuel		INTEGER					DEFAULT NULL,
 	immatriculation         VARCHAR(6),
 	consommation            INTEGER                 NOT NULL,
 
@@ -39,16 +39,25 @@ CREATE TABLE IF NOT EXISTS bdschema.Membre (
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
     montant                 INTEGER                 NOT NULL,    -- montant des parts obtenues
-    nbParts                 INTEGER                 NOT NULL    -- nombre de parts aquises
+    nbParts                 INTEGER                 NOT NULL,    -- nombre de parts aquises
 
+	PRIMARY KEY (mid)
 ) INHERITS (bdschema.Membre);
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreAutopartage (
-    quotisationAnnuelle     INTEGER                 NOT NULL    -- montant de la quotisation annuelle
+    quotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
     
+	PRIMARY KEY (mid)
 ) INHERITS (bdschema.Membre);
 
-CREATE TABLE IF NOT EXISTS bdschema.PersonnePhysique (
+CREATE TABLE IF NOT EXISTS bdschema.PersonnePhysique (	
+	
+	PRIMARY KEY (mid)
+) INHERITS (bdschema.MembreAutopartage);
+
+CREATE TABLE IF NOT EXISTS bdschema.Conducteur (
+	cid 					VARCHAR(10)				NOT NULL, 
+	numeroMembre			VARCHAR(10)				NOT NULL,
     permiConduire           VARCHAR(9)              NOT NULL,    -- chiffres sur le permi de conduire
     age                     INTEGER                 NOT NULL,    -- age de la personne
     dateDernierAccident     DATE,
@@ -58,25 +67,28 @@ CREATE TABLE IF NOT EXISTS bdschema.PersonnePhysique (
     rue                     VARCHAR(100)            NOT NULL,    
     ville                   VARCHAR(100)            NOT NULL,
     codePostal              VARCHAR(9)              NOT NULL,
-    province                VARCHAR(2)              NOT NULL
+    province                VARCHAR(2)              NOT NULL,
+	
+	PRIMARY KEY (cid), 
+	FOREIGN KEY (numeroMembre) REFERENCES bdschema.PersonnePhysique(mid)
 
-) INHERITS (bdschema.MembreAutopartage);
+);
 
 CREATE TABLE IF NOT EXISTS bdschema.PersonneMorale (
 
 ) INHERITS (bdschema.MembreAutopartage);
 
 CREATE TABLE IF NOT EXISTS bdschema.Reservation (
-    vehicule                VARCHAR(10)             NOT NULL,    -- id du vehicule
-    conducteur              VARCHAR(10)             NOT NULL,    -- id du conducteur
-    dateDebut               DATE     	            NOT NULL,    -- date de debut de la reservation
-    dateFin                 DATE	                NOT NULL,    -- date fin de la reservation
-    specifications          TEXT,
-    killometrageDebut       INTEGER,                 
-    killometrageFin         INTEGER,
-    cout                    INTEGER                 NOT NULL,    -- depends du temps, killometrage a l'odometre
-
-    PRIMARY KEY (vehicule,conducteur, dateDebut, dateFin),
-    FOREIGN KEY (vehicule, killometrageDebut, killometrageFin) REFERENCES bdschema.Vehicule (vid, killometragePrecedent, killometrageActuel),
-    FOREIGN KEY (conducteur) REFERENCES bdschema.PersonnePhysique (mid)
+	rid						VARCHAR(10)				NOT NULL, 
+	vehicule				VARCHAR(10)				NOT NULL, 
+	conducteur				VARCHAR(10)				NOT NULL, 
+	dateDebut				DATE					NOT NULL, 
+	dateFin					DATE					NOT NULL,
+	heureDebut				TIME					NOT NULL, 
+	heureFin				TIME					NOT NULL,
+	
+	PRIMARY KEY (rid), 
+	FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid),
+	FOREIGN KEY (conducteur) REFERENCES bdschema.Conducteur(cid)
+	
 );
