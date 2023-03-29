@@ -22,12 +22,12 @@ CREATE TABLE IF NOT EXISTS bdschema.Vehicule (
     specifications          TEXT                    NOT NULL,    -- siege auto... etc
     emplacement             VARCHAR(10),                         
 	immatriculation         VARCHAR(6)              NOT NULL,
-	consommationEssence     INTEGER                 NOT NULL,
+	consommationEssence     FLOAT(1)                NOT NULL,    -- Litres/100km
     odometre                INTEGER                 NOT NULL, 
-    dateMiseEnService       DATE                    NOT NULL, 
     valeurOdometreVente     INTEGER                 NOT NULL, 
+    dateMiseEnService       DATE                    NOT NULL, 
     prixHoraire             INTEGER                 NOT NULL, 
-    prixKillometre          INTEGER                 NOT NULL, 
+    prixKillometre          FLOAT(2)                NOT NULL, 
 
     PRIMARY KEY (vid),
     FOREIGN KEY (emplacement) REFERENCES bdschema.Emplacement(eid) ON UPDATE CASCADE
@@ -86,7 +86,7 @@ CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
 
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreAutopartage (
-    quotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
+    cotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
     
 	PRIMARY KEY (mid)
 ) INHERITS (bdschema.Membre);
@@ -104,7 +104,7 @@ CREATE TABLE IF NOT EXISTS bdschema.PersonnePysique (
 -- how do we link this with the membres
 CREATE TABLE IF NOT EXISTS bdschema.Conducteur (
 	cid 					VARCHAR(10)				NOT NULL, 
-    permiConduire           VARCHAR(9)              NOT NULL,    -- chiffres sur le permi de conduire
+    permiConduire           VARCHAR(15)              NOT NULL,    -- chiffres sur le permi de conduire
     age                     INTEGER                 NOT NULL,    -- age de la personne
     dateDernierAccident     DATE,
 	
