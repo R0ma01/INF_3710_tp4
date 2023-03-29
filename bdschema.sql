@@ -36,17 +36,17 @@ CREATE TABLE IF NOT EXISTS bdschema.Vehicule (
 CREATE TABLE IF NOT EXISTS bdschema.Hybrid (
     killowateur             INTEGER                 NOT NULL, 
 
-    PRIMARY KEY (mid)
+    PRIMARY KEY (vid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.Regulier (
     
-    PRIMARY KEY (mid)
+    PRIMARY KEY (vid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.MiniCamionette (
     
-    PRIMARY KEY (mid)
+    PRIMARY KEY (vid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.Assurance(
@@ -89,12 +89,12 @@ CREATE TABLE IF NOT EXISTS bdschema.MembreAutopartage (
     quotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
     
 	PRIMARY KEY (mid)
-)INHERITS (bdschema.Membre);
+) INHERITS (bdschema.Membre);
 
 CREATE TABLE IF NOT EXISTS bdschema.PersonneMorale (
 
-	PRIMARY KEY (mid),
-)INHERITS (bdschema.MembreAutopartage);
+	PRIMARY KEY (mid)
+) INHERITS (bdschema.MembreAutopartage);
 
 CREATE TABLE IF NOT EXISTS bdschema.PersonnePysique (
 
@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Facture (
     fid                     VARCHAR(10)             NOT NULL, 
 
     PRIMARY KEY (fid)
-)
+);
 
 CREATE TABLE IF NOT EXISTS bdschema.Utilisation (
     numeroMembre            VARCHAR(10)             NOT NULL, 
@@ -144,4 +144,4 @@ CREATE TABLE IF NOT EXISTS bdschema.Utilisation (
     FOREIGN KEY (numeroMembre) REFERENCES bdschema.Membre (mid),
     FOREIGN KEY (numeroFacture) REFERENCES bdschema.Facture (fid),
     FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid)
-)
+);
