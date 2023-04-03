@@ -70,10 +70,10 @@ CREATE TABLE IF NOT EXISTS bdschema.Membre (
     numBancaire             VARCHAR(9)              NOT NULL, 
     banque                  VARCHAR(3)              NOT NULL,
     motDePasse              TEXT                    NOT NULL, 
-    emplacementPrefere      VARCHAR(10)             NOT NULL, 
+    emplacementPref         VARCHAR(10)             NOT NULL, 
 
-    PRIMARY KEY (mid), 
-    FOREIGN KEY (emplacementPrefere) REFERENCES bdschema.Emplacement (eid)
+    PRIMARY KEY (mid),
+    FOREIGN KEY emplacementPref REFERENCES bdschema.Emplacement(eid)
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
@@ -87,7 +87,7 @@ CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreAutopartage (
     cotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
-    
+
 	PRIMARY KEY (mid)
 ) INHERITS (bdschema.Membre);
 
@@ -97,51 +97,50 @@ CREATE TABLE IF NOT EXISTS bdschema.PersonneMorale (
 ) INHERITS (bdschema.MembreAutopartage);
 
 CREATE TABLE IF NOT EXISTS bdschema.PersonnePysique (
-
-	PRIMARY KEY (mid)
-)INHERITS (bdschema.MembreAutopartage);
-
--- how do we link this with the membres
-CREATE TABLE IF NOT EXISTS bdschema.Conducteur (
-	cid 					VARCHAR(10)				NOT NULL, 
-    permiConduire           VARCHAR(15)              NOT NULL,    -- chiffres sur le permi de conduire
     age                     INTEGER                 NOT NULL,    -- age de la personne
-    dateDernierAccident     DATE,
-	
-	PRIMARY KEY (cid) 
-);
+    dateDernierAccident     DATE                    DEFAULT NULL,
+    permiConduire           VARCHAR(15)             NOT NULL,
+    entreprise              VARCHAR(10)             DEFAULT NULL,
+
+	PRIMARY KEY (mid),
+    FOREIGN KEY entreprise REFERENCES bdschema.PersonneMorale (mid)
+) INHERITS (bdschema.MembreAutopartage);
 
 CREATE TABLE IF NOT EXISTS bdschema.Reservation (
 	numeroMembre			VARCHAR(10)				NOT NULL,
 	vehicule				VARCHAR(10)				NOT NULL, 	
-    emplacement             VARCHAR(10)             NOT NULL, 
 	dateDebut				DATE					NOT NULL, 
 	dateFin					DATE					NOT NULL,
 	heureDebut				TIME					NOT NULL, 
 	heureFin				TIME					NOT NULL,
     exigeancesSupp          TEXT                    NOT NULL, 
 	
-	PRIMARY KEY (numeroMembre, vehicule, emplacement), 
+	PRIMARY KEY (numeroMembre, vehicule, dateDebut), 
 	FOREIGN KEY (numeroMembre) REFERENCES bdschema.MembreAutopartage (mid),
 	FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid),
-	FOREIGN KEY (emplacement) REFERENCES bdschema.emplacement(Eid) 
+	FOREIGN KEY (emplacement) REFERENCES bdschema.Vehicule(emplacement) 
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Facture (
     fid                     VARCHAR(10)             NOT NULL, 
+    solde                   INTEGER                 NOT NULL, 
+    estPaye                 BOOLEAN                 DEFAULT TRUE, 
+    dateEcheance            DATE                    NOT NULL, 
+    dateFacturation         DATE                    NOT NULL, 
+
 
     PRIMARY KEY (fid)
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Utilisation (
-    numeroMembre            VARCHAR(10)             NOT NULL, 
+    nombreKillometres       INTEGER                 NOT NULL, 
+    numeroMembre			VARCHAR(10)				NOT NULL,
+	vehicule				VARCHAR(10)				NOT NULL, 	
+	dateDebut				DATE					NOT NULL,  
     numeroFacture           VARCHAR(10)             NOT NULL, 
-    vehicule                VARCHAR(10)             NOT NULL, 
-    dateDebut               DATE                    NOT NULL, 
     dateFin                 DATE                    NOT NULL, 
 
-    PRIMARY KEY (numeroMembre, numeroFacture, Vehicule),
-    FOREIGN KEY (numeroMembre) REFERENCES bdschema.Membre (mid),
+    PRIMARY KEY (numeroMembre, numeroFacture, vehicule, dateDebut),
+    FOREIGN KEY (numeroMembre, vehicule, dateDebut) REFERENCES bdschema.Reservation (numeroMembre, vehicule, dateDebut),
     FOREIGN KEY (numeroFacture) REFERENCES bdschema.Facture (fid),
-    FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid)
 );
