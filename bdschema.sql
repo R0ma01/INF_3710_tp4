@@ -36,7 +36,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Vehicule (
 CREATE TABLE IF NOT EXISTS bdschema.Hybrid (
     killowateur             INTEGER                 NOT NULL, 
 
-    PRIMARY KEY (vid)
+    PRIMARY KEY (vid) IF NOT EXISTS INSERT INTO bdschema.Vehicule (mid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.Regulier (
