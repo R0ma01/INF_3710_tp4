@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Membre (
     emplacementPref         VARCHAR(10)             NOT NULL, 
 
     PRIMARY KEY (mid),
-    FOREIGN KEY emplacementPref REFERENCES bdschema.Emplacement(eid)
+    FOREIGN KEY (emplacementPref) REFERENCES bdschema.Emplacement(eid)
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
@@ -108,9 +108,8 @@ CREATE TABLE IF NOT EXISTS bdschema.Reservation (
     exigeancesSupp          TEXT                    NOT NULL, 
 	
 	PRIMARY KEY (numeroMembre, vehicule, dateDebut), 
-	FOREIGN KEY (numeroMembre) REFERENCES bdschema.MembreAutopartage (mid),
-	FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid),
-	FOREIGN KEY (emplacement) REFERENCES bdschema.Vehicule(emplacement) 
+	FOREIGN KEY (numeroMembre) REFERENCES bdschema.Membre (mid),
+	FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid)
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Facture (
@@ -135,5 +134,5 @@ CREATE TABLE IF NOT EXISTS bdschema.Utilisation (
 
     PRIMARY KEY (numeroMembre, numeroFacture, vehicule, dateDebut),
     FOREIGN KEY (numeroMembre, vehicule, dateDebut) REFERENCES bdschema.Reservation (numeroMembre, vehicule, dateDebut),
-    FOREIGN KEY (numeroFacture) REFERENCES bdschema.Facture (fid),
+    FOREIGN KEY (numeroFacture) REFERENCES bdschema.Facture (fid)
 );
