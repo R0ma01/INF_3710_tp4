@@ -29,24 +29,24 @@ CREATE TABLE IF NOT EXISTS bdschema.Vehicule (
     prixHoraire             INTEGER                 NOT NULL, 
     prixKillometre          FLOAT(2)                NOT NULL, 
 
-    PRIMARY KEY (vid),
+    Constraint "Vehicule_pkey" Primary Key ("vid"),
     FOREIGN KEY (emplacement) REFERENCES bdschema.Emplacement(eid) ON UPDATE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Hybrid (
     killowateur             INTEGER                 NOT NULL, 
 
-    PRIMARY KEY (vid) IF NOT EXISTS INSERT INTO bdschema.Vehicule (mid)
+    --PRIMARY KEY (vid) 
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.Regulier (
     
-    PRIMARY KEY (vid)
+    --PRIMARY KEY (vid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.MiniCamionette (
     
-    PRIMARY KEY (vid)
+    --PRIMARY KEY (vid)
 ) INHERITS(bdschema.Vehicule);
 
 CREATE TABLE IF NOT EXISTS bdschema.Assurance(
