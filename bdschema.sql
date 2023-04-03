@@ -84,27 +84,19 @@ CREATE TABLE IF NOT EXISTS bdschema.MembreCooperative (
 ) INHERITS (bdschema.Membre);
 
 
-
-CREATE TABLE IF NOT EXISTS bdschema.MembreAutopartage (
-    cotisationAnnuelle     INTEGER                 NOT NULL,    -- montant de la quotisation annuelle
-
+CREATE TABLE IF NOT EXISTS bdschema.PersonneMorale (
+    cotisationAnnuelle     INTEGER                  NOT NULL,
 	PRIMARY KEY (mid)
 ) INHERITS (bdschema.Membre);
-
-CREATE TABLE IF NOT EXISTS bdschema.PersonneMorale (
-
-	PRIMARY KEY (mid)
-) INHERITS (bdschema.MembreAutopartage);
 
 CREATE TABLE IF NOT EXISTS bdschema.PersonnePysique (
     age                     INTEGER                 NOT NULL,    -- age de la personne
     dateDernierAccident     DATE                    DEFAULT NULL,
     permiConduire           VARCHAR(15)             NOT NULL,
-    entreprise              VARCHAR(10)             DEFAULT NULL,
+    cotisationAnnuelle     INTEGER                  NOT NULL,
 
-	PRIMARY KEY (mid),
-    FOREIGN KEY entreprise REFERENCES bdschema.PersonneMorale (mid)
-) INHERITS (bdschema.MembreAutopartage);
+	PRIMARY KEY (mid)
+) INHERITS (bdschema.Membre);
 
 CREATE TABLE IF NOT EXISTS bdschema.Reservation (
 	numeroMembre			VARCHAR(10)				NOT NULL,
@@ -127,9 +119,10 @@ CREATE TABLE IF NOT EXISTS bdschema.Facture (
     estPaye                 BOOLEAN                 DEFAULT TRUE, 
     dateEcheance            DATE                    NOT NULL, 
     dateFacturation         DATE                    NOT NULL, 
-
-
-    PRIMARY KEY (fid)
+    noMembre                VARCHAR(10)             NOT NULL,
+   
+    PRIMARY KEY (fid),
+    FOREIGN KEY (noMembre) REFERENCES Membre(mid)
 );
 
 CREATE TABLE IF NOT EXISTS bdschema.Utilisation (
