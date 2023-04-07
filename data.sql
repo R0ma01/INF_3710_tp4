@@ -16,7 +16,7 @@ VALUES  ('cami000001', 'toyota', 'scienna','bluetooth', 'Emp0000001', 'J53ZTX', 
         ('regu000004', 'lamborghini', 'urus','bluetooth', 'Emp0000003', 'H33LLO', 10.1, 10000, 90000, '2022-03-01', 15, 1.55),
         ('hybr000001', 'toyota', 'prius','siege-auto', 'Emp0000003', 'P01YTE', 6.6, 70000, 71000,  '2021-03-01', 8, 0.80),
         ('hybr000002', 'mazda', 'mazda3', 'bluetooth', 'Emp0000001', 'S31FIE', 9.5, 56000, 80000,  '2022-03-01', 3, 0.60),
-        ('hybr000003', 'bmw', 'i8' , 'bluetooth siege-auto', NULL, 'G64GVD', 3.2, 5000,  100000, '2023-03-25', 2, 0.45);
+        ('hybr000003', 'bmw', 'i8' , 'bluetooth siege-auto', 'Emp0000003', 'G64GVD', 3.2, 5000,  100000, '2023-03-25', 2, 0.45);
 
 INSERT INTO bdschema.miniCamionette (vid)
 VALUES  ('cami000001'),
@@ -50,13 +50,13 @@ VALUES  ('Ass0000001', 'cami000001', '2023-03-01', '2024-03-01', 'Intact' ),
 
 -- MEMBRES
 INSERT INTO bdschema.Membre (mid, numeroPorte, rue, ville, codePostal, adresseEmail, numBancaire, banque, motDePasse, emplacementPrefere)
-VALUES  ('MeCo000001', 4, 'Monterergie', 'Montreal', 'H3C2T2', 'alex.Tristan02@gmail.com', 05043512, 003, 'PasseDeMots123!', 'Emp0000001'),
+VALUES  ('MeCo000001', 4, 'Monterergie', 'Montréal', 'H3C2T2', 'alex.Tristan02@gmail.com', 05043512, 003, 'PasseDeMots123!', 'Emp0000001'),
         ('MeCo000002', 789, 'Thibaudeau', 'Chicoutimi', 'H6D8T4', 'elwiiiise.Warin@hotmail.com', 74523895, 002, 'jaimelesChevaux34', 'Emp0000003'),
-        ('MePh000001', 97,  'Monterergie', 'Montreal',  'H4H3F4', 'gevienve.trello@outlook.com', 43279123, 003, 'Anacondalandq12', 'Emp0000001'),
+        ('MePh000001', 97,  'Monterergie', 'Montréal',  'H4H3F4', 'gevienve.trello@outlook.com', 43279123, 003, 'Anacondalandq12', 'Emp0000001'),
         ('MePh000002', 453, 'Justice', 'Sagueney',  'H7Y5G5', 'hohoho@gmail.com', 56743492, 002, '5boiledPotatoes', 'Emp0000002'),
         ('MePh000003', 845, 'Rose', 'Tadoussac', 'H8K2N3', 'maths4life@gmail.com', 43240754, 001, 'existanceIsPointless', 'Emp0000004'),
         ('MePh000004', 342, 'Harrow', 'Tadoussac', 'H7D1H1', 'lily.Mayer@gmail.com', 34322211, 001, 'JeSuisCute23', 'Emp0000004'),
-        ('MeMo000001', 105,  'Narwhale',  'Montreal',   'H0G2S4', 'factures@genetec.com', 74927490, 003, 'GenetectTransport1', 'Emp0000001'), 
+        ('MeMo000001', 105,  'Narwhale',  'Montréal',   'H0G2S4', 'factures@genetec.com', 74927490, 003, 'GenetectTransport1', 'Emp0000001'), 
         ('MeMo000002', 78, 'Sentoriel',  'Sagueney',   'H5B9L1', 'factures@gyro.com', 35323111, 002, 'GyroBouge2', 'Emp0000002'),
         ('MeMo000003', 486, 'St-Exupery', 'Chicoutimi', 'H4J2H2', 'factures@stc.com', 28934432, 001, 'transportsPasPublics', 'Emp0000003');
 
@@ -78,7 +78,7 @@ VALUES  ('MeMo000001', 500),  -- prix de base pour une personne morale
 INSERT INTO bdschema.Reservation (numeroMembre, vehicule, emplacement, dateDebut, dateFin, heureDebut, heureFin, exigeancesSupp)
 VALUES  ('MeCo000001', 'cami000001', 'Emp0000001', '2023-12-24', '2024-04-10', '10:00', '13:00', 'bluetooth'),
         ('MeCo000002', 'regu000002', 'Emp0000002', '2023-02-21', '2023-03-21', '11:00', '13:00', 'siege-auto'), 
-        ('MePh000001', 'cami000002', 'Emp0000003', '2023-01-22', '2023-01-24', '12:00', '13:00', 'gps'),  --passe
+        ('MePh000001', 'cami000002', 'Emp0000003', '2023-01-22', '2023-01-24', '12:00', '13:00', 'gps'),  --entre
         ('MePh000002', 'cami000002', 'Emp0000004', '2024-11-11', '2024-12-11', '17:00', '13:00', ''), --futur
         ('MePh000003', 'regu000003', 'Emp0000004', '2022-07-27', '2022-08-09', '13:00', '13:00', 'siege-auto'), --passe
         ('MePh000004', 'regu000002', 'Emp0000004', '2021-01-22', '2021-02-01', '13:00', '13:00', 'gps'), --passe

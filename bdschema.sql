@@ -77,7 +77,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Membre (
     numBancaire             VARCHAR(9)              NOT NULL, 
     banque                  VARCHAR(3)              NOT NULL,
     motDePasse              TEXT                    NOT NULL, 
-    emplacementPrefere         VARCHAR(10)             NOT NULL, 
+    emplacementPrefere      VARCHAR(10)             NOT NULL, 
 
     PRIMARY KEY (mid),
     FOREIGN KEY (emplacementPrefere) REFERENCES bdschema.Emplacement(eid)
