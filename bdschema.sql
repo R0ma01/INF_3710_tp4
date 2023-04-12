@@ -122,6 +122,7 @@ CREATE TABLE IF NOT EXISTS bdschema.Reservation (
     exigeancesSupp          TEXT                    NOT NULL, 
 	
 	PRIMARY KEY (numeroMembre, vehicule, dateDebut), 
+	FOREIGN KEY (emplacement) REFERENCES bdschema.Emplacement (eid),
 	FOREIGN KEY (numeroMembre) REFERENCES bdschema.Membre (mid),
 	FOREIGN KEY (vehicule) REFERENCES bdschema.Vehicule (vid)
 );
