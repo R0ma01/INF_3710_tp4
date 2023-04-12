@@ -99,8 +99,8 @@ VALUES  ('Fact000001', 'MeCo000001', FALSE, '2025-02-01', '2024-01-01'),
         ('Fact000007', 'MeMo000001', FALSE, '2024-02-01', '2023-01-01'),
         ('Fact000008', 'MeMo000002', FALSE, '2024-02-01', '2023-01-01'),
         ('Fact000009', 'MeMo000003', TRUE, '2023-02-01', '2022-01-01'),
-        ('Fact0000010', 'MeMo000001', FALSE, '2025-02-01', '2024-01-01'),
-        ('Fact0000011', 'MePh000001', FALSE, '2024-02-01', '2023-01-01');
+        ('Fact000010', 'MeMo000001', FALSE, '2025-02-01', '2024-01-01'),
+        ('Fact000011', 'MePh000001', FALSE, '2024-02-01', '2023-01-01');
  
 -- UTILISATION
 INSERT INTO bdschema.Utilisation (numeroMembre, vehicule, numeroFacture, dateDebut, dateFin, nombreKillometres)
