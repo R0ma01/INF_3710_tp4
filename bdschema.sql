@@ -113,7 +113,8 @@ CREATE TABLE IF NOT EXISTS bdschema.PersonnePhysique (
 
 CREATE TABLE IF NOT EXISTS bdschema.Reservation (
 	numeroMembre			VARCHAR(10)				NOT NULL,
-	vehicule				VARCHAR(10)				NOT NULL, 	
+	vehicule				VARCHAR(10)				NOT NULL, 
+	emplacement				VARCHAR(10)				NOT NULL,
 	dateDebut				DATE					NOT NULL, 
 	dateFin					DATE					NOT NULL,
 	heureDebut				TIME					NOT NULL, 
