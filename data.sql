@@ -65,7 +65,7 @@ VALUES  ('MeCo000001', 100, 10),
         ('MeCo000002', 450, 60);
 
 INSERT INTO bdschema.PersonnePhysique (mid, age, dateDernierAccident, permisConduire, cotisationAnnuelle)
-VALUES  ('MePh000001', 34, NULL, 'A3556-12352-43'), 
+VALUES  ('MePh000001', 34, NULL, 'A3556-12352-43', 80), 
         ('MePh000002', 41, '2020-09-12', 'K9421-74621-08', 70),  
         ('MePh000003', 43, '2023-02-11', 'X3402-94639-23', 90),
         ('MePh000004', 18, '2021-09-12', 'U0378-03842-31', 90);
